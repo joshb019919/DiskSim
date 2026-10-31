@@ -39,7 +39,10 @@
 #define YYERROR_VERBOSE
 int libparamlex(void);
 
-void yyerror (char *s) {
+int yylex(void);
+void yyerror(const char *s);
+
+void yyerror (const char *s) {
   fprintf(stderr, "*** error: on line %d of %s: ", lp_lineno, lp_filename);
   fprintf(stderr, "%s\n", s);
 }

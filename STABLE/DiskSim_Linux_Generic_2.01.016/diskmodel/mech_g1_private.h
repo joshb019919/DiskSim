@@ -76,4 +76,12 @@ extern dm_mech_g1_seekfn dm_mech_g1_seekfns[];
 
 
 
+
+/* seek-curve loaders; used by the generated modules/dm_mech_g1_param.c */
+struct lp_list;
+void dm_mech_g1_read_extracted_seek_curve(char *filename, int *cntptr,
+                                          int **distsptr, dm_time_t **timesptr);
+int do_1st10_seeks(struct dm_mech_g1 *result, struct lp_list *l);
+int do_hpl_seek(struct dm_mech_g1 *result, struct lp_list *l);
+
 #endif //  _DM_MECH_G1_PRIVATE_H

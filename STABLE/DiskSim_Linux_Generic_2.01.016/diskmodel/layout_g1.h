@@ -211,4 +211,11 @@ extern struct dm_layout_if g1_layout_sectpercylspare;
 extern struct dm_layout_if g1_layout_sectperrangespare;
 extern struct dm_layout_if g1_layout_sectperzonespare;
 
+/* zone loader; used by the generated modules/dm_layout_g1_param.c */
+struct lp_list;
+int disk_load_zones(struct lp_list *l, struct dm_layout_g1 *layout);
+struct dm_layout_g1_band;
+int getslips(struct dm_layout_g1_band *z, struct lp_list *l);
+int getdefects(struct dm_layout_g1_band *z, struct lp_list *l);
+
 #endif   /*  _DM_LAYOUT_G1_H  */

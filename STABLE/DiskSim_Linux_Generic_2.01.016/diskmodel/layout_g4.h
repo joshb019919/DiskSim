@@ -139,4 +139,11 @@ struct dm_layout_g4 {
 
 extern struct dm_layout_if layout_g4;
 
+/* loaders; used by the generated modules/dm_layout_g4_param.c */
+struct lp_list;
+int g4_load_tp(struct dm_layout_g4 *r, struct lp_list *l);
+int g4_load_idx(struct dm_layout_g4 *r, struct lp_list *l);
+int g4_load_slips(struct dm_layout_g4 *r, struct lp_list *l);
+int g4_load_remaps(struct dm_layout_g4 *r, struct lp_list *l);
+
 #endif    // _DM_LAYOUT_G4_H

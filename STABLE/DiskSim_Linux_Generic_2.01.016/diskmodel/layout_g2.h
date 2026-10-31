@@ -96,6 +96,10 @@ struct dm_layout_g2_zone {
 
 
 
+/* zone loader; used by the generated modules/dm_layout_g2_param.c */
+struct lp_list;
+void g2_load_zones(struct dm_layout_g2 *l, struct lp_list *zl);
+
 #endif  // _DM_LAYOUT_G2_H
 
 

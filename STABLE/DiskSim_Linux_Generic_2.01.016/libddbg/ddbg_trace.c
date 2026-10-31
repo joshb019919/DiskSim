@@ -81,6 +81,10 @@ static int ddbg_classes_len = 0;
 static int ddbg_class_max = 0;
 static FILE *ddbg_tracefile = 0;
 
+// Prototypes to fix for newer compilers
+int bit_zero(char*, int);
+int bit_setall(char*, int);
+
 // register a new class.  Returns an int class id to be used with
 // subsequent calls
 int ddbg_register(char *classname) {
