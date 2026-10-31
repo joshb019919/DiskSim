@@ -123,6 +123,23 @@ double disksim_time_from_msec(double);
 struct dm_disk_if *
 disksim_getdiskmodel(struct disksim_interface *, int);
 
+struct disksim_disk_observation {
+	int cylinder;
+	int head;
+	double angle_turns; // 0 to 1 revolution
+};
+
+/*
+ * Get the disk state after DiskSim reaches time_ms and the seek is done.
+ * Return 0 if successful, or -1 if the state is unavailable.
+ * iface must be initialized, diskno must be valid, and out cannot be NULL.
+ */
+int disksim_get_disk_state(
+	struct disksim_interface *iface,
+	int diskno,
+	double time_ms,
+	struct disksim_disk_observation *out);
+
 #ifdef __cplusplus
 }
 #endif

@@ -550,5 +550,36 @@ disksim_getdiskmodel(struct disksim_interface *i, int disknum)
     return i->disksim->diskinfo->disks[disknum]->model;
 }
 
+int disksim_get_disk_state(
+    struct disksim_interface *iface,
+    int diskno,
+    double time_ms,
+    struct disksim_disk_observation *out)
+{
+    disk *d = iface->disksim->diskinfo->disks[diskno];
+
+    if (!d) {
+        return -1;
+    }
+
+    dm_time_t elapsed = dm_time_dtoi(time_ms) - d->currtime_i;
+    dm_time_t period = d->model->mech->dm_period(d->model);
+
+    if (elapsed < 0 || period <= 0) {
+        return -1;
+    }
+
+    /* Bring a copy of the stored angle up to the observation time. */
+    elapsed %= period;
+    dm_angle_t theta = d->mech_state.theta;
+    theta += d->model->mech->dm_rotate(d->model, &elapsed);
+
+    out->cylinder = d->mech_state.cyl;
+    out->head = d->mech_state.head;
+    out->angle_turns = dm_angle_itod(theta);
+
+    return 0;
+}
+
 // End of file
 
